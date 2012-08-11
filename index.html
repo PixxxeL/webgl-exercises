@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width">
+		<title>WebGL test</title>
+		<link rel="stylesheet" href="css/style.css">
+		
+		<!-- Vertex shader -->
+		<script id="shader-vs" type="x-shader/x-vertex">
+		attribute vec3 aVertexPosition;
+		attribute vec4 aVertexColor;
+		
+		uniform mat4 uMVMatrix;
+		uniform mat4 uPMatrix;
+		
+		varying vec4 vColor;
+		
+		void main(void) {
+		    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+		    vColor = aVertexColor;
+		}
+		</script>
+
+		<!-- Fragment shader -->
+		<script id="shader-fs" type="x-shader/x-fragment">
+		precision mediump float;
+
+		varying vec4 vColor;
+		
+		void main(void) {
+		    gl_FragColor = vColor;
+		}
+		</script>
+		
+	</head>
+	<body>
+		<div role="main" id="content-holder">
+			<div>FPS: <span id="fps-holder">60</span></div>
+			<canvas id="scene-holder" width="640" height="480">HTML5 not supported!</canvas>
+			<div id="error-holder"></div>
+		</div>
+		<script src="js/libs/underscore.js"></script>
+		<script src="js/libs/glMatrix-0.9.5.min.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
